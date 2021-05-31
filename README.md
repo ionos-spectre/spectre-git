@@ -13,7 +13,7 @@ gem install spectre-git
 Add the module to you `spectre.yml`
 
 ```yml
-includes:
+include:
  - spectre/git
 ```
 
