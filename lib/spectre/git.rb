@@ -33,6 +33,7 @@ module Spectre
         @__cfg['username'] = url_match[:user]
         @__cfg['password'] = url_match[:pass]
         @__cfg['name'] = url_match[:name] unless @__cfg['name']
+        @__cfg['working_dir'] = './tmp' unless @__cfg['working_dir']
       end
 
       def username user
@@ -52,7 +53,8 @@ module Spectre
       end
 
       def clone
-        @__repo = Git.clone(@__cfg['url'], @__cfg['name'], branch: @__cfg['branch'], log: @__logger)
+        path = File.join(@__cfg['working_dir'], @__cfg['name'])
+        @__repo = ::Git.clone(get_url, path, branch: @__cfg['branch'], log: @__logger)
       end
 
       def add path
