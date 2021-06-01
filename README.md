@@ -1,5 +1,7 @@
 # Spectre Git
 
+[![Build Status](https://www.travis-ci.com/cneubaur/spectre-git.svg?branch=master)](https://www.travis-ci.com/cneubaur/spectre-git)
+
 This is a [spectre](https://bitbucket.org/cneubaur/spectre-core) module which provides some basic git commands for use with spectre.
 
 ## Install
