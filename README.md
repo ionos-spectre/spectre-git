@@ -69,3 +69,20 @@ git 'example' do
   push
 end
 ```
+
+# Functions
+
+The following functions are available within the `git` block.
+
+| Method | Arguments | Multiple | Description |
+| -------| ----------| -------- | ----------- |
+| `username` | `string` | no | The username for Git authentication |
+| `password` | `string` | no | The password for Git authentication |
+| `branch` | `string` | no | The git branch to operatate on. If ommitted `master` will be used. |
+| `clone` | _none_ | no | Clones the configured repository |
+| `add` | `string` | yes | Adds a file to the stage. `git add <file_path>` |
+| `add_all` | _none_ | no | Adds all files to the stage. `git add --all` |
+| `commit` | `string` | yes | Creates a new commit with the given message. `git commit -m '<message>'` |
+| `push` | _none_ | no | Adds a file to the stage. `git push` |
+| `read_file` | `string` | yes | Reads the content of a file within the local Git repository. Given path is relative to checkout directory. Returns the file content. |
+| `write_file` | `string`, `string` | yes | Writes the given content to a file within the local Git repository. Given path is relative to checkout directory. |
