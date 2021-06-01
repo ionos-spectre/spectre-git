@@ -1,0 +1,20 @@
+language: ruby
+
+rvm:
+ - 2.5
+
+dist: xenial
+os: linux
+
+branches:
+  only:
+   - master
+
+jobs:
+  include:
+    - stage: publish gem
+      if: tag =~ /^\d\.\d\.\d(?:-\S*)?$/
+      script:
+       - rake build
+       - ls pkg
+       - gem push -k $RUBYGEMS_APIKEY pkg/*.gem
