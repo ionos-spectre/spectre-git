@@ -54,14 +54,24 @@ RSpec.describe Spectre::Git do
 
   it 'clones a repository' do
     tmp_dir = './tmp'
-    clone_dir = File.join(tmp_dir, 'spectre-git')
+    clone_dir = File.join(tmp_dir, 'example')
 
     FileUtils.rm_rf(tmp_dir)
 
     begin
-      Spectre::Git.git 'https://bitbucket.org/cneubaur/spectre-git.git' do
+      Spectre::Git.git 'https://github.com/cneubauer/example.git' do
+        branch 'main'
+
         working_dir tmp_dir
         clone
+
+        val = read_file('dummy.txt')
+
+        write_file('dummy.txt', val.to_i + 1)
+
+        add 'dummy.txt'
+        commit 'Dummy file updated'
+        push
       end
 
       expect(Dir.exist? clone_dir).to eq(true)

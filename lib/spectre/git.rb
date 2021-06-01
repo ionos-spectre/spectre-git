@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'git'
 require 'logger'
 require 'spectre'
@@ -6,14 +7,14 @@ require 'spectre'
 module Spectre
   module Git
     module Version
-      MAJOR = 1
-      MINOR = 0
+      MAJOR = 0
+      MINOR = 1
       TINY  = 0
     end
 
     VERSION = [Version::MAJOR, Version::MINOR, Version::TINY].compact * '.'
 
-    class GitAccess
+    class GitAccess < Spectre::DslClass
       def initialize cfg, logger
         @__logger = logger
         @__cfg = cfg
@@ -45,7 +46,8 @@ module Spectre
       end
 
       def working_dir path
-        @__cfg['working_dir'] = path
+        @__cfg['working_dir'] = path if path
+        @__cfg['working_dir']
       end
 
       def branch name
@@ -53,7 +55,8 @@ module Spectre
       end
 
       def clone
-        path = File.join(@__cfg['working_dir'], @__cfg['name'])
+        @__cfg['working_dir'] = path = File.join(@__cfg['working_dir'], @__cfg['name'])
+        FileUtils.rm_rf(path)
         @__repo = ::Git.clone(get_url, path, branch: @__cfg['branch'], log: @__logger)
       end
 
@@ -81,6 +84,21 @@ module Spectre
         @__repo.pull('origin', @__cfg['branch'])
       end
 
+      def write_file path, content
+        full_path = File.join(@__cfg['working_dir'], path)
+
+        file = File.open(full_path, 'w')
+        file.write(content)
+        file.close
+
+        full_path
+      end
+
+      def read_file path
+        full_path = File.join(@__cfg['working_dir'], path)
+        File.read(full_path)
+      end
+
       private
 
       def get_url
@@ -91,7 +109,7 @@ module Spectre
 
     class << self
       @@cfg = {}
-      @@logger = Logger.new(STDOUT)
+      @@logger = ::Logger.new(STDOUT)
       @@last_access = nil
 
       def git name, &block
