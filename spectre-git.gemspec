@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["me@christianneubauer.de"]
 
   spec.summary       = "Git module for spectre"
-  spec.description   = "Adds git command to the spectre framework"
+  spec.description   = "Adds basic git commands to the spectre framework"
   spec.homepage      = "https://bitbucket.org/cneubaur/spectre-git"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.5.0")
@@ -20,9 +20,8 @@ Gem::Specification.new do |spec|
 
   spec.files        += Dir.glob('lib/**/*')
 
-  spec.bindir        = "exe"
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency 'git', '>= 1.8.0'
-  spec.add_runtime_dependency 'spectre-core', '>= 1.8.0'
+  spec.add_runtime_dependency 'spectre-core', '>= 1.8.4'
 end
