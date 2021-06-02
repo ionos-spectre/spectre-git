@@ -12,14 +12,14 @@ gem install spectre-git
 
 ## Configure
 
-Add the module to you `spectre.yml`
+Add the module to your `spectre.yml`
 
 ```yml
 include:
  - spectre/git
 ```
 
-Configure some predefined Git access options in you environment file
+Configure some predefined Git access options in your environment file
 
 ```yml
 git:
