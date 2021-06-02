@@ -14,10 +14,9 @@ jobs:
   include:
     - stage: build gem
       script:
-       - rake build
+       - bundle exec rspec spec
+       - bundle exec rake build
     - stage: publish gem
       if: tag =~ /^\d\.\d\.\d(?:-\S*)?$/
       script:
-       - rake build
-       - ls pkg
        - gem push -k $RUBYGEMS_APIKEY pkg/*.gem
