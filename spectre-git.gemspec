@@ -1,8 +1,6 @@
-require_relative 'lib/spectre/git'
-
 Gem::Specification.new do |spec|
   spec.name          = 'spectre-git'
-  spec.version       = Spectre::Git::VERSION
+  spec.version       = '0.1.0'
   spec.authors       = ['Christian Neubauer']
   spec.email         = ['me@christianneubauer.de']
 
