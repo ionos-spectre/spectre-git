@@ -20,4 +20,5 @@ jobs:
     - stage: publish gem
       if: branch =~ /^\d\.\d\.\d(?:-\S*)?$/
       script:
+       - bundle exec rake build
        - gem push -k $RUBYGEMS_APIKEY pkg/*.gem
