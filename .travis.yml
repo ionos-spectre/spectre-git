@@ -18,6 +18,6 @@ jobs:
        - bundle exec rspec spec
        - bundle exec rake build
     - stage: publish gem
-      if: tag =~ /^\d\.\d\.\d(?:-\S*)?$/
+      if: branch =~ /^\d\.\d\.\d(?:-\S*)?$/
       script:
        - gem push -k $RUBYGEMS_APIKEY pkg/*.gem
