@@ -53,31 +53,23 @@ RSpec.describe Spectre::Git do
   end
 
   it 'clones a repository' do
-    tmp_dir = './tmp'
-    clone_dir = File.join(tmp_dir, 'example')
+    repo_mock = double(::Git::Repository)
+    expect(repo_mock).to receive(:add).with('dummy.txt')
+    expect(repo_mock).to receive(:commit).with('Dummy file updated')
+    expect(repo_mock).to receive(:push)
 
-    FileUtils.rm_rf(tmp_dir)
+    ::Git.stub(:clone).and_return(repo_mock)
 
-    begin
-      Spectre::Git.git 'https://github.com/cneubauer/example.git' do
-        branch 'main'
+    Spectre::Git.git 'https://github.com/cneubauer/example.git' do
+      branch 'main'
 
-        working_dir tmp_dir
-        clone
+      working_dir 'tmp'
 
-        val = read_file('dummy.txt')
+      clone
 
-        write_file('dummy.txt', val.to_i + 1)
-
-        add 'dummy.txt'
-        commit 'Dummy file updated'
-        push
-      end
-
-      expect(Dir.exist? clone_dir).to eq(true)
-
-    ensure
-      FileUtils.rm_rf(tmp_dir)
+      add 'dummy.txt'
+      commit 'Dummy file updated'
+      push
     end
   end
 end
