@@ -21,4 +21,5 @@ jobs:
       if: branch =~ /^\d\.\d\.\d(?:-\S*)?$/
       script:
        - bundle exec rake build
-       - gem push -k $RUBYGEMS_APIKEY pkg/*.gem
+       - 'echo -e "---\n:rubygems_api_key: $RUBYGEMS_APIKEY" > ~/.gem/credentials'
+       - gem push pkg/*.gem
