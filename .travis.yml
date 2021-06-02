@@ -22,4 +22,5 @@ jobs:
       script:
        - bundle exec rake build
        - 'echo -e "---\n:rubygems_api_key: $RUBYGEMS_APIKEY" > ~/.gem/credentials'
+       - chmod 0600 ~/.gem/credentials
        - gem push pkg/*.gem
