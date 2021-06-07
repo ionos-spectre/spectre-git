@@ -104,7 +104,7 @@ module Spectre
       @@logger = ::Logger.new(STDOUT)
       @@last_access = nil
 
-      def git name, &block
+      def git name = nil, &block
         cfg = @@cfg[name] || {}
 
         cfg['url'] = name if not cfg['url']
