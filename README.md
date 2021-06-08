@@ -88,3 +88,4 @@ The following functions are available within the `git` block.
 | `push` | _none_ | no | Adds a file to the stage. `git push` |
 | `read_file` | `string` | yes | Reads the content of a file within the local Git repository. Given path is relative to checkout directory. Returns the file content. |
 | `write_file` | `string`, `string` | yes | Writes the given content to a file within the local Git repository. Given path is relative to checkout directory. |
+| `cleanup` | _none_ | no | Deletes the cloned repository. |

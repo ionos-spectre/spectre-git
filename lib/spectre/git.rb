@@ -91,6 +91,10 @@ module Spectre
         File.read(full_path)
       end
 
+      def cleanup
+        FileUtils.rm_rf(@__cfg['working_dir'])
+      end
+
       private
 
       def get_url
