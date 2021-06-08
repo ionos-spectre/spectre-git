@@ -40,9 +40,14 @@ git 'https://some-git.com/path/to/repo/example.git' do
   username 'dummy'
   password '*****'
 
+  branch 'main'
   clone
 
   # Do some file editing
+  file_content = read_file('path/to/file')
+  file_content = file_content.to_i + 1
+
+  write_file('path/to/file', file_content)
 
   add 'path/to/file'
   # add_all # Same as git add --all
