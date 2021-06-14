@@ -52,6 +52,33 @@ RSpec.describe Spectre::Git do
     expect(assembled_url).to eq(url)
   end
 
+  it 'configures git access with preconfigured username and password' do
+    cfg = nil
+    assembled_url = ''
+
+    Spectre.configure({
+      'git' => {
+        'example' => {
+          'url' => 'https://some-git.com/path/to/repo/example.git',
+          'username' => 'someuser',
+          'password' => 'supersecret',
+        }
+      }
+    })
+
+    Spectre::Git.git 'example' do
+      cfg = @__cfg
+      assembled_url = get_url()
+    end
+
+    expect(cfg['url']).to eq('some-git.com/path/to/repo/example.git')
+    expect(cfg['username']).to eq('someuser')
+    expect(cfg['password']).to eq('supersecret')
+    expect(cfg['scheme']).to eq('https')
+
+    expect(assembled_url).to eq('https://someuser:supersecret@some-git.com/path/to/repo/example.git')
+  end
+
   it 'clones a repository' do
     repo_mock = double(::Git::Repository)
     expect(repo_mock).to receive(:add).with('dummy.txt')

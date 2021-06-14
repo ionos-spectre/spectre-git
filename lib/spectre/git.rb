@@ -23,8 +23,8 @@ module Spectre
 
         @__cfg['url'] = url_match[:url]
         @__cfg['scheme'] = url_match[:scheme]
-        @__cfg['username'] = url_match[:user]
-        @__cfg['password'] = url_match[:pass]
+        @__cfg['username'] = url_match[:user] unless @__cfg['username']
+        @__cfg['password'] = url_match[:pass] unless @__cfg['password']
         @__cfg['name'] = url_match[:name] unless @__cfg['name']
         @__cfg['working_dir'] = './tmp' unless @__cfg['working_dir']
       end
