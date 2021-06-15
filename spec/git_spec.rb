@@ -80,12 +80,10 @@ RSpec.describe Spectre::Git do
   end
 
   it 'clones a repository' do
-    repo_mock = double(::Git::Repository)
-    expect(repo_mock).to receive(:add).with('dummy.txt')
-    expect(repo_mock).to receive(:commit).with('Dummy file updated')
-    expect(repo_mock).to receive(:push)
-
-    ::Git.stub(:clone).and_return(repo_mock)
+    class Spectre::Git::GitAccess
+      def run cmd, log: true
+      end
+    end
 
     Spectre::Git.git 'https://github.com/cneubauer/example.git' do
       branch 'main'

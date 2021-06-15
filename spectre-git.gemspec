@@ -20,6 +20,5 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'git', '>= 1.8.0'
   spec.add_runtime_dependency 'spectre-core', '>= 1.8.4'
 end

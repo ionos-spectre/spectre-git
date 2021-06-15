@@ -1,7 +1,6 @@
 describe 'Git' do
   it 'does some Git operations', tags: [:sample] do
     git 'example' do
-      branch 'main'
       clone
 
       content = read_file('dummy.txt')
