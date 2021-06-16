@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = 'spectre-git'
-  spec.version       = '0.1.1'
+  spec.version       = '0.2.0'
   spec.authors       = ['Christian Neubauer']
   spec.email         = ['me@christianneubauer.de']
 
@@ -20,6 +20,5 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'git', '>= 1.8.0'
   spec.add_runtime_dependency 'spectre-core', '>= 1.8.4'
 end

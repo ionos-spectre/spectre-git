@@ -89,8 +89,10 @@ The following functions are available within the `git` block.
 | `clone` | _none_ | no | Clones the configured repository |
 | `add` | `string` | yes | Adds a file to the stage. `git add <file_path>` |
 | `add_all` | _none_ | no | Adds all files to the stage. `git add --all` |
+| `tag` | `string` | no | Add an annotated `tag`. `git tag -a -m <message>` |
 | `commit` | `string` | yes | Creates a new commit with the given message. `git commit -m '<message>'` |
 | `push` | _none_ | no | Adds a file to the stage. `git push` |
 | `read_file` | `string` | yes | Reads the content of a file within the local Git repository. Given path is relative to checkout directory. Returns the file content. |
 | `write_file` | `string`, `string` | yes | Writes the given content to a file within the local Git repository. Given path is relative to checkout directory. |
 | `cleanup` | _none_ | no | Deletes the cloned repository. |
+| `run` | `string` | yes | Run a custom command within the Git repository directory |
