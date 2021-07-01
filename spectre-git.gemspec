@@ -6,15 +6,15 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Git module for spectre'
   spec.description   = 'Adds basic git commands to the spectre framework'
-  spec.homepage      = 'https://bitbucket.org/cneubaur/spectre-git'
+  spec.homepage      = 'https://github.com/cneubauer/spectre-git'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.5.0')
 
   spec.metadata['allowed_push_host'] = 'https://rubygems.org/'
 
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://bitbucket.org/cneubaur/spectre-git'
-  spec.metadata['changelog_uri'] = 'https://bitbucket.org/cneubaur/spectre-git/src/master/CHANGELOG.md'
+  spec.metadata['source_code_uri'] = 'https://github.com/cneubauer/spectre-git'
+  spec.metadata['changelog_uri'] = 'https://github.com/cneubauer/spectre-git/blob/master/CHANGELOG.md'
 
   spec.files        += Dir.glob('lib/**/*')
 

@@ -4,7 +4,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/spectre-git.svg)](https://badge.fury.io/rb/spectre-git)
 
-This is a [spectre](https://bitbucket.org/cneubaur/spectre-core) module which provides some basic git commands for use with spectre.
+This is a [spectre](https://github.com/cneubauer/spectre-core) module which provides some basic git commands for use with spectre.
 
 ## Install
 
