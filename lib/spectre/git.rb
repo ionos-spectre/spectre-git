@@ -21,7 +21,7 @@ module Spectre
 
         raise "invalid git url: '#{git_url}'" unless url_match
 
-        @__cfg['url'] = url_match[:url]
+        @__cfg['url_path'] = url_match[:url]
         @__cfg['scheme'] = url_match[:scheme]
         @__cfg['username'] = url_match[:user] unless @__cfg['username']
         @__cfg['password'] = url_match[:pass] unless @__cfg['password']
@@ -145,7 +145,7 @@ module Spectre
 
       def get_url
         cred = @__cfg['username'] ? "#{@__cfg['username']}:#{@__cfg['password']}@" : ''
-        "#{@__cfg['scheme']}://#{cred}#{@__cfg['url']}"
+        "#{@__cfg['scheme']}://#{cred}#{@__cfg['url_path']}"
       end
     end
 
