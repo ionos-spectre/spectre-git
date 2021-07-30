@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = 'spectre-git'
-  spec.version       = '0.2.0'
+  spec.version       = '0.2.1'
   spec.authors       = ['Christian Neubauer']
   spec.email         = ['me@christianneubauer.de']
 
