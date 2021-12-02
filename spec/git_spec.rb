@@ -85,7 +85,7 @@ RSpec.describe Spectre::Git do
       end
     end
 
-    Spectre::Git.git 'https://github.com/cneubauer/example.git' do
+    Spectre::Git.git 'https://github.com/ionos-spectre/example.git' do
       branch 'main'
 
       working_dir 'tmp'

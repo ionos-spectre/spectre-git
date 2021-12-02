@@ -1,10 +1,8 @@
 # Spectre Git
 
-[![Build Status](https://www.travis-ci.com/cneubaur/spectre-git.svg?branch=master)](https://www.travis-ci.com/cneubaur/spectre-git)
-
 [![Gem Version](https://badge.fury.io/rb/spectre-git.svg)](https://badge.fury.io/rb/spectre-git)
 
-This is a [spectre](https://github.com/cneubauer/spectre-core) module which provides some basic git commands for use with spectre.
+This is a [spectre](https://github.com/ionos-spectre/spectre-core) module which provides some basic git commands for use with spectre.
 
 ## Install
 
