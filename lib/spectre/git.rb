@@ -104,6 +104,10 @@ module Spectre
         run("git pull")
       end
 
+      def pull
+        run("git pull")
+      end
+
       def write_file path, content
         full_path = File.join(@__repo_path, path)
 

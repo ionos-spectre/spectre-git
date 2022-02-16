@@ -7,7 +7,7 @@ This is a [spectre](https://github.com/ionos-spectre/spectre-core) module which 
 ## Install
 
 ```bash
-gem install spectre-git
+$ sudo gem install spectre-git
 ```
 
 ## Configure
@@ -83,7 +83,7 @@ The following functions are available within the `git` block.
 | -------| ----------| -------- | ----------- |
 | `username` | `string` | no | The username for Git authentication |
 | `password` | `string` | no | The password for Git authentication |
-| `branch` | `string` | no | The git branch to operatate on. If ommitted `master` will be used. |
+| `branch` | `string` | no | The Git branch to operate on. If omitted, `master` will be used. |
 | `clone` | _none_ | no | Clones the configured repository |
 | `add` | `string` | yes | Adds a file to the stage. `git add <file_path>` |
 | `add_all` | _none_ | no | Adds all files to the stage. `git add --all` |
