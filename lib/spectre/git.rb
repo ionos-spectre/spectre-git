@@ -89,7 +89,7 @@ module Spectre
       end
 
       def tag name, message: nil
-        run("git tag -a -m \"#{message}\"")
+        run("git tag -a -m \"#{message}\" \"#{name}\"")
       end
 
       def commit message
