@@ -1,5 +1,7 @@
 # Spectre Git
 
+[![Build](https://github.com/ionos-spectre/spectre-git/actions/workflows/build.yml/badge.svg)](https://github.com/ionos-spectre/spectre-git/actions/workflows/build.yml)
+
 [![Gem Version](https://badge.fury.io/rb/spectre-git.svg)](https://badge.fury.io/rb/spectre-git)
 
 This is a [spectre](https://github.com/ionos-spectre/spectre-core) module which provides some basic git commands for use with spectre.
