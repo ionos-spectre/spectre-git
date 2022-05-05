@@ -62,8 +62,8 @@ RSpec.describe Spectre::Git do
           'url' => 'https://some-git.com/path/to/repo/example.git',
           'username' => 'someuser',
           'password' => 'supersecret',
-        }
-      }
+        },
+      },
     })
 
     Spectre::Git.git 'example' do

@@ -124,11 +124,11 @@ module Spectre
       end
 
       def run cmd, log: true
-        stdin, stdout, stderr, wait_thr = Open3.popen3(cmd, chdir: @__repo_path)
+        _stdin, stdout, stderr, wait_thr = Open3.popen3(cmd, chdir: @__repo_path)
 
         @__logger.info(cmd) if log
 
-        output = stdout.gets(nil)
+        _output = stdout.gets(nil)
         stdout.close
 
         error = stderr.gets(nil)
@@ -153,7 +153,7 @@ module Spectre
       def git name = nil, &block
         cfg = @@cfg[name] || {}
 
-        cfg['url'] = name if not cfg['url']
+        cfg['url'] = name unless cfg['url']
 
         @@last_access = GitAccess.new(cfg, @@logger) if name
         @@last_access.instance_eval &block
