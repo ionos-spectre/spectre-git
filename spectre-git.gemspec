@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Git module for spectre'
   spec.description   = 'Adds basic git commands to the spectre framework'
   spec.homepage      = 'https://github.com/ionos-spectre/spectre-git'
-  spec.license       = 'MIT'
-  spec.required_ruby_version = Gem::Requirement.new('>= 3.0.0')
+  spec.license       = 'GPL-3.0-or-later'
+  spec.required_ruby_version = '>= 3.1.0'
 
   spec.metadata['allowed_push_host'] = 'https://rubygems.org/'
 
@@ -19,6 +19,4 @@ Gem::Specification.new do |spec|
   spec.files        += Dir.glob('lib/**/*')
 
   spec.require_paths = ['lib']
-
-  spec.add_runtime_dependency 'spectre-core', '>= 1.8.4'
 end
