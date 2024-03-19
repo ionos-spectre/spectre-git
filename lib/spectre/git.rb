@@ -1,12 +1,11 @@
 require 'open3'
 require 'fileutils'
 require 'logger'
-require 'spectre'
 
 
 module Spectre
   module Git
-    class GitAccess < Spectre::DslClass
+    class GitAccess
       def initialize cfg, logger
         @__logger = logger
         @__cfg = cfg
@@ -146,30 +145,18 @@ module Spectre
     end
 
     class << self
-      @@cfg = {}
-      @@logger = ::Logger.new(STDOUT)
+      @@config = defined?(Spectre::CONFIG) ? Spectre::CONFIG['git'] : {}
+      @@logger = defined?(Spectre.logger) ? Spectre.logger : Logger.new(STDOUT)
       @@last_access = nil
 
       def git name = nil, &block
-        cfg = @@cfg[name] || {}
+        config = @@config[name] || {}
 
-        cfg['url'] = name unless cfg['url']
+        config['url'] = name unless config['url']
 
-        @@last_access = GitAccess.new(cfg, @@logger) if name
+        @@last_access = GitAccess.new(config, @@logger) if name
         @@last_access.instance_eval &block
       end
     end
-
-    Spectre.register do |config|
-      @@logger = ::Logger.new config['log_file'], progname: 'spectre/git'
-
-      if config.key? 'git'
-        config['git'].each do |name, cfg|
-          @@cfg[name] = cfg
-        end
-      end
-    end
-
-    Spectre.delegate :git, to: self
   end
 end
