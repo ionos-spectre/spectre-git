@@ -30,8 +30,10 @@ RSpec.describe Spectre::Git do
 
     allow(Open3).to receive(:popen3).and_return([stdin, stdout, stderr, wait_thr])
 
-    opts = { chdir: 'C:/Users/accou/Development/spectre/spectre-git/tmp/example' }
-    expect(Open3).to receive(:popen3).with('git clone --branch main https://github.com/ionos-spectre/example.git C:/Users/accou/Development/spectre/spectre-git/tmp/example', opts)
+    working_dir = File.expand_path File.join(File.dirname(__FILE__), '../tmp/example')
+    opts = { chdir: working_dir }
+    
+    expect(Open3).to receive(:popen3).with("git clone --branch main https://github.com/ionos-spectre/example.git #{working_dir}", opts)
     expect(Open3).to receive(:popen3).with('git add "dummy.txt"', opts)
     expect(Open3).to receive(:popen3).with('git commit -m "Dummy file updated"', opts)
     expect(Open3).to receive(:popen3).with('git push', opts)
