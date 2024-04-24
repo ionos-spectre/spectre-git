@@ -11,7 +11,7 @@ module Spectre
   }
 end
 
-require 'spectre/git'
+require_relative '../lib/spectre/git'
 
 RSpec.describe Spectre::Git do
   before do
