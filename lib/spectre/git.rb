@@ -145,8 +145,12 @@ module Spectre
     end
 
     class << self
-      @@config = defined?(Spectre::CONFIG) ? Spectre::CONFIG['git'] : {}
-      @@logger = defined?(Spectre.logger) ? Spectre.logger : Logger.new(STDOUT)
+      @@config = defined?(Spectre::CONFIG) ? Spectre::CONFIG['git'] || {} : {}
+
+      def logger
+        @@logger ||= defined?(Spectre.logger) ? Spectre.logger : Logger.new(STDOUT)
+      end
+
       @@last_access = nil
 
       def git name = nil, &block
@@ -154,7 +158,7 @@ module Spectre
 
         config['url'] = name unless config['url']
 
-        @@last_access = GitAccess.new(config, @@logger) if name
+        @@last_access = GitAccess.new(config, logger) if name
         @@last_access.instance_eval &block
       end
     end
