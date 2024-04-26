@@ -2,7 +2,6 @@ require 'open3'
 require 'fileutils'
 require 'logger'
 
-
 module Spectre
   module Git
     class GitAccess
@@ -16,7 +15,8 @@ module Spectre
       end
 
       def url git_url
-        url_match = git_url.match /^(?<scheme>http(?:s)?):\/\/(?:(?<user>[^\/:]*):(?<pass>.*)@)?(?<url>.*\/(?<name>[^\/]*)\.git)$/
+        url_match = git_url
+          .match(%r{^(?<scheme>http(?:s)?)://(?:(?<user>[^/:]*):(?<pass>.*)@)?(?<url>.*/(?<name>[^/]*)\.git)$})
 
         raise "invalid git url: '#{git_url}'" unless url_match
 
@@ -69,12 +69,12 @@ module Spectre
           clone_cmd << "http.sslCAInfo=#{@__cfg['cert']}"
         end
 
-        clone_cmd << get_url
+        clone_cmd << build_url
         clone_cmd << @__repo_path
 
         clone_cmd = clone_cmd.join(' ')
 
-        @__logger.info("#{clone_cmd.gsub /:([^\:\@\/\/]*)@/, ':*****@'}")
+        @__logger.info(clone_cmd.gsub(%r{:([^\:\@/]*)@}, ':*****@').to_s)
 
         run(clone_cmd, log: false)
       end
@@ -84,7 +84,7 @@ module Spectre
       end
 
       def add_all
-        run("git add --all")
+        run('git add --all')
       end
 
       def tag name, message: nil
@@ -96,11 +96,11 @@ module Spectre
       end
 
       def push
-        run("git push")
+        run('git push')
       end
 
       def pull
-        run("git pull")
+        run('git pull')
       end
 
       def write_file path, content
@@ -133,12 +133,12 @@ module Spectre
         error = stderr.gets(nil)
         stderr.close
 
-        raise error unless wait_thr.value.exitstatus == 0
+        raise error unless wait_thr.value.exitstatus.zero?
       end
 
       private
 
-      def get_url
+      def build_url
         cred = @__cfg['username'] ? "#{@__cfg['username']}:#{@__cfg['password']}@" : ''
         "#{@__cfg['scheme']}://#{cred}#{@__cfg['url_path']}"
       end
@@ -148,18 +148,18 @@ module Spectre
       @@config = defined?(Spectre::CONFIG) ? Spectre::CONFIG['git'] || {} : {}
 
       def logger
-        @@logger ||= defined?(Spectre.logger) ? Spectre.logger : Logger.new(STDOUT)
+        @@logger ||= defined?(Spectre.logger) ? Spectre.logger : Logger.new($stdout)
       end
 
       @@last_access = nil
 
-      def git name = nil, &block
+      def git(name = nil, &)
         config = @@config[name] || {}
 
         config['url'] = name unless config['url']
 
         @@last_access = GitAccess.new(config, logger) if name
-        @@last_access.instance_eval &block
+        @@last_access.instance_eval(&)
       end
     end
   end
