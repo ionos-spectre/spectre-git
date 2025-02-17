@@ -5,6 +5,8 @@ require 'logger'
 module Spectre
   module Git
     class GitAccess
+      include Spectre::Delegate if defined? Spectre::Delegate
+
       def initialize cfg, logger
         @__logger = logger
         @__cfg = cfg
