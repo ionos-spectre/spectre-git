@@ -144,23 +144,25 @@ module Spectre
       end
     end
 
-    class << self
-      @@config = defined?(Spectre::CONFIG) ? Spectre::CONFIG['git'] || {} : {}
+    class Client
+      include Spectre::Delegate if defined? Spectre::Delegate
 
-      def logger
-        @@logger ||= defined?(Spectre.logger) ? Spectre.logger : Logger.new($stdout)
+      def initialize config, logger
+        @config = config['git'] || {}
+        @logger = logger
+        @last_access = nil
       end
 
-      @@last_access = nil
-
       def git(name = nil, &)
-        config = @@config[name] || {}
+        config = @config[name] || {}
 
         config['url'] = name unless config['url']
 
-        @@last_access = GitAccess.new(config, logger) if name
-        @@last_access.instance_eval(&)
+        @last_access = GitAccess.new(config, @logger) if name
+        @last_access.instance_eval(&)
       end
     end
   end
+
+  Engine.register(Git::Client, :git) if defined? Engine
 end

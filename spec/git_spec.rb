@@ -1,15 +1,13 @@
 require 'fileutils'
 require 'stringio'
 
-module Spectre
-  CONFIG = {
-    'git' => {
-      'example' => {
-        'url' => 'https://github.com/ionos-spectre/example.git',
-      }
+CONFIG = {
+  'git' => {
+    'example' => {
+      'url' => 'https://github.com/ionos-spectre/example.git',
     }
   }
-end
+}
 
 require_relative '../lib/spectre/git'
 
@@ -42,30 +40,34 @@ RSpec.describe Spectre::Git do
   end
 
   it 'operate on git repo' do
-    Spectre::Git.git 'https://github.com/ionos-spectre/example.git' do
-      branch 'main'
+    Spectre::Git::Client
+      .new(CONFIG, Logger.new(StringIO.new))
+      .git 'https://github.com/ionos-spectre/example.git' do
+        branch 'main'
 
-      working_dir 'tmp'
+        working_dir 'tmp'
 
-      clone
+        clone
 
-      add 'dummy.txt'
-      commit 'Dummy file updated'
-      push
-    end
+        add 'dummy.txt'
+        commit 'Dummy file updated'
+        push
+      end
   end
 
   it 'operate on git repo with preconfig' do
-    Spectre::Git.git 'example' do
-      branch 'main'
+    Spectre::Git::Client
+      .new(CONFIG, Logger.new(StringIO.new))
+      .git 'example' do
+        branch 'main'
 
-      working_dir 'tmp'
+        working_dir 'tmp'
 
-      clone
+        clone
 
-      add 'dummy.txt'
-      commit 'Dummy file updated'
-      push
-    end
+        add 'dummy.txt'
+        commit 'Dummy file updated'
+        push
+      end
   end
 end
