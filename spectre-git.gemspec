@@ -20,6 +20,6 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'stringio'
   spec.add_dependency 'logger'
+  spec.add_dependency 'stringio'
 end
